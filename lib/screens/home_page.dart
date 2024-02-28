@@ -1,0 +1,148 @@
+import 'package:flutter/material.dart';
+import 'package:tarea3/models/libros.dart'; // Importa tu modelo de libros
+
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    int selectedIndex = 0;
+    Size size = MediaQuery.of(context).size;
+
+    List<Book> _bookList = Book.bookList;
+
+    // Categorías de libros
+    List<String> _bookTypes = [
+      'Novela',
+      'Ficción histórica',
+      'Misterio',
+      'Ciencia ficción',
+      // Agrega más categorías según sea necesario
+    ];
+
+    // Función para alternar el estado de favorito
+    bool toggleIsFavorited(bool isFavorited) {
+      return !isFavorited;
+    }
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Bienvenidos'),
+        backgroundColor: Color(0xFFB1BDC2), // Puedes ajustar el color de fondo del AppBar
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: const EdgeInsets.only(top: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    width: size.width * .9,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.search,
+                          color: Colors.black54.withOpacity(.6),
+                        ),
+                        const Expanded(
+                          child: TextField(
+                            showCursor: false,
+                            decoration: InputDecoration(
+                              hintText: 'Search Book',
+                              border: InputBorder.none,
+                              focusedBorder: InputBorder.none,
+                            ),
+                          ),
+                        ),
+                        Icon(
+                          Icons.mic,
+                          color: Colors.black54.withOpacity(.6),
+                        ),
+                      ],
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.grey.withOpacity(.1), // Usa un color por defecto
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              height: 50.0,
+              width: size.width,
+              child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: _bookTypes.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                        child: Text(
+                          _bookTypes[index],
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: selectedIndex == index
+                                ? FontWeight.bold
+                                : FontWeight.w300,
+                            color: selectedIndex == index
+                                ? Colors.blue // Usa un color por defecto
+                                : Colors.black,
+                          ),
+                        ),
+                      ),
+                    );
+                  }),
+            ),
+            SizedBox(height: 20),
+            Container(
+              height: MediaQuery.of(context).size.height - 190, // Ajusta la altura según sea necesario
+              child: ListView.builder(
+                itemCount: _bookList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  Book book = _bookList[index];
+                  return Card(
+                    child: ListTile(
+                      leading: Image.asset(
+                        book.imageURL,
+                        width: 80,
+                        height: 120,
+                        fit: BoxFit.cover,
+                      ),
+                      title: Text(book.title),
+                      subtitle: Text(book.author),
+                      trailing: IconButton(
+                        icon: Icon(
+                          book.isFavorited
+                              ? Icons.favorite
+                              : Icons.favorite_border,
+                          color: Colors.red,
+                        ),
+                        onPressed: () {
+                          // Lógica para alternar el estado de favorito
+                          // Puedes llamar a la función toggleIsFavorited aquí
+                        },
+                      ),
+                      onTap: () {
+                        // Lógica para mostrar detalles del libro
+                        // Puedes navegar a una nueva pantalla o mostrar un diálogo con más detalles
+                      },
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
