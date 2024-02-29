@@ -50,16 +50,14 @@ class Book {
         isFavorited: false,
         description: 'Una reinterpretación de la Odisea, centrada en la transformadora Circe y su encuentro con Odiseo.',
         isSelected: false),
-    // Agrega más libros aquí...
   ];
 
-  // Obtener los libros favoritos
   static List<Book> getFavoritedBooks(){
     List<Book> _bookList = Book.bookList;
     return _bookList.where((element) => element.isFavorited == true).toList();
   }
 
-  // Obtener los libros añadidos al carrito
+
   static List<Book> addedToCartBooks(){
     List<Book> _selectedBooks = Book.bookList;
     return _selectedBooks.where((element) => element.isSelected == true).toList();

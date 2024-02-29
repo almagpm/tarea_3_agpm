@@ -11,16 +11,16 @@ class HomePage extends StatelessWidget {
 
     List<Book> _bookList = Book.bookList;
 
-    // Categorías de libros
+    
     List<String> _bookTypes = [
       'Novela',
       'Ficción histórica',
       'Misterio',
       'Ciencia ficción',
-      // Agrega más categorías según sea necesario
+      
     ];
 
-    // Función para alternar el estado de favorito
+    
     bool toggleIsFavorited(bool isFavorited) {
       return !isFavorited;
     }
@@ -28,7 +28,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Bienvenidos'),
-        backgroundColor: Color(0xFFB1BDC2), // Puedes ajustar el color de fondo del AppBar
+        backgroundColor: Color(0xFFB1BDC2), 
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -67,7 +67,7 @@ class HomePage extends StatelessWidget {
                       ],
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.grey.withOpacity(.1), // Usa un color por defecto
+                      color: Colors.grey.withOpacity(.1), 
                       borderRadius: BorderRadius.circular(20),
                     ),
                   )
@@ -93,7 +93,7 @@ class HomePage extends StatelessWidget {
                                 ? FontWeight.bold
                                 : FontWeight.w300,
                             color: selectedIndex == index
-                                ? Colors.blue // Usa un color por defecto
+                                ? Colors.blue 
                                 : Colors.black,
                           ),
                         ),
@@ -103,7 +103,7 @@ class HomePage extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Container(
-              height: MediaQuery.of(context).size.height - 190, // Ajusta la altura según sea necesario
+              height: MediaQuery.of(context).size.height - 190, 
               child: ListView.builder(
                 itemCount: _bookList.length,
                 itemBuilder: (BuildContext context, int index) {
@@ -126,13 +126,12 @@ class HomePage extends StatelessWidget {
                           color: Colors.red,
                         ),
                         onPressed: () {
-                          // Lógica para alternar el estado de favorito
-                          // Puedes llamar a la función toggleIsFavorited aquí
+                          // Lógica para alternar el estado de favorito todavia no se hace en esta tarea
+                         
                         },
                       ),
                       onTap: () {
-                        // Lógica para mostrar detalles del libro
-                        // Puedes navegar a una nueva pantalla o mostrar un diálogo con más detalles
+                        // Lógica para mostrar detalles del libro, no contemplado en esta tarea
                       },
                     ),
                   );
